@@ -1,28 +1,19 @@
-from cgitb import html
-from django.shortcuts import render
-from django.http  import HttpResponse
+from django.shortcuts import render,redirect
+from django.http import HttpResponse, Http404
 import datetime as dt
+from .models import Article
+from django.core.exceptions import ObjectDoesNotExist
+
 
 # Create your views here.
-def welcome(request):
-    return HttpResponse('Welcome to the Moringa Tribune')
-def convert_dates(dates):
 
-    # Function that gets the weekday number for the date.
-    day_number = dt.date.weekday(dates)
 
-    days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday',"Sunday"]
-
-    # Returning the actual day of the week
-    day = days[day_number]
-    return day
-
-def news_of_day(request):
+def news_today(request):
     date = dt.date.today()
-    html
+    return render(request, 'all-news/today-news.html',{'date': date})
 
-    return HttpResponse(html)
-    
+
+
 def past_days_news(request, past_date):
     try:
         # Converts data from the string Url
@@ -56,6 +47,9 @@ def search_results(request):
         message = "You haven't searched for any term"
         return render(request, 'all-news/search.html',{"message":message})  
 
-
-
-
+def article(request,article_id):
+    try:
+        article = Article.objects.get(id = article_id)
+    except ObjectDoesNotExist:
+        raise Http404()
+    return render(request,"all-news/article.html", {"article":article})            
