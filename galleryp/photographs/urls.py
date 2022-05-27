@@ -7,10 +7,10 @@ from django.conf.urls.static import static
 
 urlpatterns=[
 
-    path('',views.todays_photos,name='newsToday'),
-    path('archives/(\d{4}-\d{2}-\d{2})/',views. past_days_photographs,name = 'pastNews'), 
+    path('',views.todays_photos,name='todaysphotos'),
+    path('archives/(\d{4}-\d{2}-\d{2})/',views. past_days_photographs,name = 'pastphotos'), 
     path('search/', views.search_results, name='search_results'),
-    path('article/<article_id>',views.article,name ='article')
+    # path('article/<article_id>',views.article,name ='article')
 ]
 
 if settings.DEBUG:
