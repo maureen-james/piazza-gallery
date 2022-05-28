@@ -5,7 +5,7 @@ import datetime as dt
 # Create your models here.
 
 class Image(models.Model):
-    # image = models.ImageField(upload_to = 'pictures/')
+    image = models.ImageField(upload_to = 'pictures/',default='default value')
     # image = CloudinaryField('pictures')
     name = models.CharField(max_length =30)
     description = models.CharField(max_length = 100)

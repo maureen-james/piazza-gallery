@@ -6,11 +6,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns=[
-
-    path('',views.todays_photos,name='todaysphotos'),
-    path('archives/(\d{4}-\d{2}-\d{2})/',views. past_days_photographs,name = 'pastphotos'), 
+    path('',views.index,name='index'),
     path('search/', views.search_results, name='search_results'),
-    # path('article/<article_id>',views.article,name ='article')
+    path('category/(\d+)', views.get_category, name='get_category'),
+    path('location/(\d+)', views.get_location, name='get_location')
 ]
 
 if settings.DEBUG:
