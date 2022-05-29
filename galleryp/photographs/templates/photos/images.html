@@ -1,25 +1,57 @@
 {%extends 'photos/base.html'%}
+{% load static %}
+{% block content %}
+{{ block.super}}
 
- {% block content %}
+<div class="container">
+  <div class="row">
+    {% for category in categories %}
+    <div class="col-md-3">
+      <a href="{% url 'get_category' category.id %}">{{category.name}}</a>
+    </div>
+    {% endfor %}
+    <div class="col-md-3"></div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3"></div>
+  </div>
 
- <div class="container">
 
-   <div class="row">
-    <img src="{{photo.image.url}}" class="img-responsive" alt="Image" height="300px" width="100%">
-   </div>
 
-   <div class="row">
-     <h1 class="text-center">{{image.category}}</h1>
-   </div>
+  <div class="row ">
+    {% for photo in photos %}
+    <div class="col-md-4">
+      <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal{{photo.id}}">
+        <img src="{{photo.image.url}}" class="img-responsive" alt="Image" height="300px" width="100%">
+      </a>
+      <div class="col-md-4"></div>
+      <div class="col-md-4"></div>
+    </div>
 
-   <div class="row">
-     <p>{{image.description}}</p>
-   </div>
 
-   <div class="row">
-     <p>Posted {{created_on|timesince}}</p>
-   </div>
 
- </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal{{photo.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" st>{{photo.name}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p><b>Description:</b>{{photo.description}} <br> <b>Location:</b> {{photo.location}}</p>
 
- {% endblock %}
+            <div class="row">
+              <img src="{{photo.image.url}}" class="img-fluid" alt="Image">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="text" id="imagelink" value="{{photo.image.url}}"
+              class="btn btn-outline-primary form-control photoUrl" readonly>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+{% endblock %}
