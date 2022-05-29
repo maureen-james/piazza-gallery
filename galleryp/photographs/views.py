@@ -11,7 +11,7 @@ def index(request):
     photos=Image.get_all_images()
 
    
-    return render(request,'index.html',{'photos':photos,'categories':categories,'locations':locations})
+    return render(request,'photos/images.html',{'photos':photos,'categories':categories,'locations':locations})
 def search_results(request):
 
     if 'name' in request.GET and request.GET["name"]:
