@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
+import dj_database_url
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,14 +79,21 @@ WSGI_APPLICATION = 'galleryp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'photography',
+#         'USER': 'moringa',
+#     'PASSWORD':'maureen',
+#     }
+# }  
+
+DATABASE_URL =  'postgres://phbhmejsqjnzal:cb402cc644512a75c52e8addde591ab8874335562fd482f8dcdf1d2a2febd67f@ec2-3-234-131-8.compute-1.amazonaws.com:5432/de9rqbiqo2j7g7'
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'photography',
-        'USER': 'moringa',
-    'PASSWORD':'maureen',
-    }
-}    
+    'default': dj_database_url.config(
+        default = config('DATABASE_URL')
+    )
+}       
 
 
 # Password validation
