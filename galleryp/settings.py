@@ -54,6 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 CSRF_COOKIE_SECURE = False
+CSRF_TRUSTED_ORIGINS = ['https://photographs.herokuapp.com']
 
 ROOT_URLCONF = 'galleryp.urls'
 
