@@ -7,7 +7,7 @@
 <div class="category" >
   <div class="row">
     {% for category in categories %}
-    <div class="col-md-3" style="background-color: khaki;">
+    <div class="col-md-3" style="background-color: rgb(212, 194, 32);">
       <a href="{% url 'get_category' category.id %}">{{category.name}}</a>
     </div>
     {% endfor %}
