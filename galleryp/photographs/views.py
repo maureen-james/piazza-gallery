@@ -24,12 +24,18 @@ def search_results(request):
 
     else:
         message = "You haven't searched for any term"
-        return render(request, 'search.html',{"message":message})
-def get_category(request,category_id):
-    images=Image.filter_by_category(category_id)
+        return render(request, 'photos/search.html',{"message":message})
+def get_category(request,category):
+    images=Image.filter_by_category(category)
 
-    return render (request,'category.html',{'images':images})
-def get_location(request,location_id):
-    images=Image.filter_by_location(location_id)
+    return render (request,'photos/category.html',{'images':images})
 
-    return render (request,'location.html',{'images':images})
+    
+def get_location(request,location):
+    images=Image.filter_by_location(location)
+
+    return render (request,'photos/location.html',{'images':images})
+
+    
+
+    

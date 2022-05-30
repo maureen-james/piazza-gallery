@@ -9,8 +9,8 @@ class Image(models.Model):
     # image = CloudinaryField('pictures')
     name = models.CharField(max_length =30)
     description = models.CharField(max_length = 100)
-    location = models.ForeignKey('Location',on_delete=models.CASCADE)
-    category=models.ForeignKey('Category',on_delete=models.CASCADE)
+    location = models.ForeignKey('Location',on_delete=models.CASCADE,null=True)
+    category=models.ForeignKey('Category',on_delete=models.CASCADE,null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     
     #saves images
@@ -42,14 +42,14 @@ class Image(models.Model):
 
     # get images by location
     @classmethod
-    def filter_by_location(cls, location_id):
-        images = Image.objects.filter(location__id=location_id)
+    def filter_by_location(cls, location):
+        images = Image.objects.filter(location=location)
         return images
 
     # get images by category
     @classmethod
-    def filter_by_category(cls, category_id):
-        images = Image.objects.filter(category_id=category_id)
+    def filter_by_category(cls, category):
+        images = Image.objects.filter(category=category)
         return images
 
     # search images
@@ -65,6 +65,15 @@ class Category(models.Model):
         return categories
     def __str__(self):
         return self.name
+    def save_category(self):
+        self.save()
+
+    def delete_category(self):
+        self.delete()
+
+    @classmethod
+    def update_category(cls,id,name):
+        cls.objects.filter(id = id).update(name = name)    
 
 class Location(models.Model):
     name = models.CharField(max_length=50, unique=True)
