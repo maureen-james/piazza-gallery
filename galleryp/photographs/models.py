@@ -42,14 +42,14 @@ class Image(models.Model):
 
     # get images by location
     @classmethod
-    def filter_by_location(cls, location):
-        images = Image.objects.filter(location=location)
+    def filter_by_location(cls, location_id):
+        images = Image.objects.filter(location_id=location_id)
         return images
 
     # get images by category
     @classmethod
-    def filter_by_category(cls, category):
-        images = Image.objects.filter(category=category)
+    def filter_by_category(cls, category_id):
+        images = Image.objects.filter(category_id=category_id)
         return images
 
     # search images

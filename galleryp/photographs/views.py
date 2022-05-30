@@ -12,6 +12,7 @@ def index(request):
 
    
     return render(request,'photos/images.html',{'photos':photos,'categories':categories,'locations':locations})
+
 def search_results(request):
 
     if 'name' in request.GET and request.GET["name"]:
@@ -25,14 +26,16 @@ def search_results(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'photos/search.html',{"message":message})
-def get_category(request,category):
-    images=Image.filter_by_category(category)
+
+        
+def get_category(request,category_id):
+    images=Image.filter_by_category(category_id)
 
     return render (request,'photos/category.html',{'images':images})
 
-    
-def get_location(request,location):
-    images=Image.filter_by_location(location)
+
+def get_location(request,location_id):
+    images=Image.filter_by_location(location_id)
 
     return render (request,'photos/location.html',{'images':images})
 
